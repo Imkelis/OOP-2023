@@ -5,9 +5,10 @@ import processing.core.PApplet;
 public class BugZap extends PApplet
 {
 
-	float playerX = 5;
-	float playerY = 5;
-	float playerWidth = 10;
+	float playerX = 500;
+	float playerY = 400;
+	float playerWidth = 15;
+	float playerHeight = 50;
 
 	public void settings()
 	{
@@ -20,33 +21,48 @@ public class BugZap extends PApplet
 
 	}
 
-	void drawPlayer(float x, float y, float w){
+	void drawPlayer(float x, float y, float w, float h){
 
 		fill(0, 0, 0);
 		stroke(50,50,80);
-		rect(500, 400, 15, 50);
+		rect(x, y, w, h);
 	}
 
 	public void keyPressed()
 	{
+
+		float lp = 1;
+
 		if (keyCode == LEFT)
 		{
-			System.out.println("Left arrow pressed");
+				lp = 2;
+				if (playerX >= 15){
+				playerX = playerX - 20;
+				}
 		}
 		if (keyCode == RIGHT)
 		{
-			System.out.println("Right arrow pressed");
-		}
+			lp = 1;
+			if (playerX <= 975){
+				playerX = playerX + 20;
+				}
+			}
 		if (key == ' ')
 		{
-			System.out.println("SPACE key pressed");
+			if(lp == 1){
+			line(playerX, playerY, playerX - 220, 400);
+			}
+
+			if(lp == 2){
+				line(playerX, playerY, playerX + 220, 400);
+				}
 		}
 	}
 
 	public void draw()
 	{	
 		background(255, 255, 255);
-		drawPlayer(1000,1000,600);
+		drawPlayer(playerX, playerY, playerWidth, playerHeight);
 	}
 
 }
