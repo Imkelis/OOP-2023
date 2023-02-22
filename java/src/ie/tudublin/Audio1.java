@@ -94,16 +94,17 @@ public class Audio1 extends PApplet
         case 1:
             
         background(0);
-        for(int i = 0 ; i < ab.size() ; i ++)
-        {
-            //float c = map(ab.get(i), -1, 1, 0, 255);
-            float c = map(i, 0, ab.size(), 0, 255);
-            stroke(c, 255, 255);
-            float f = ab.get(i) * halfH;
-            line(i, halfH + f, i, halfH - f);                    
-        }
-        break;
+                for(int i = 0 ; i < ab.size() ; i ++)
+                {
+                    //float c = map(ab.get(i), -1, 1, 0, 255);
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    float f = ab.get(i) * height;
+                    line(i, halfH + f, f, halfH - i);                    
+                }
+                break;
         
+
         }
         
 
