@@ -11,8 +11,8 @@ public class BugZap extends PApplet
 	}
 
 	public void setup() {
-		colorMode(HSB);
-		background(0);
+		//colorMode(HSB);
+		background(255,mouseX,0);
 
 	
 		
@@ -21,6 +21,15 @@ public class BugZap extends PApplet
 	
 	public void draw()
 	{	
+		fill(500, 200, 0);
+		noStroke();
+		circle(255, 330, 400);
+
+		fill(0, 50, 200);
+		ellipse(255, 255, 500, mouseX);
+
 		
+
 	}
+
 }
