@@ -3,12 +3,12 @@ package ie.tudublin;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Ship extends PApplet{
+public class Ship {
     private PVector pos;
     private PVector forward;
     private PApplet p;
 
-    public Ship(float x, float y, float size, int c, PApplet p) 
+    public Ship(float x, float y, float size, int c, PApplet p)
     {
         pos = new PVector(x, y);
         forward = new PVector(0, -1);
@@ -97,3 +97,4 @@ public class Ship extends PApplet{
     
     
 }
+
