@@ -1,5 +1,6 @@
 package ie.tudublin;
 
+import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.data.TableRow;
 
@@ -14,6 +15,7 @@ public class AIShip extends Ship {
         this.currentPointIndex = 0;
     }
 
+    
     public void move() {
         if (path.size() > 0) {
             PVector currentPoint = path.get(currentPointIndex);

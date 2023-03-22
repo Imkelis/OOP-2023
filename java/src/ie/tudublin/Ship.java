@@ -1,11 +1,12 @@
 package ie.tudublin;
 
+import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 public class Ship {
-    private PVector pos;
-    private PVector forward;
+    protected PVector pos;
+    protected PVector forward;
     private PApplet p;
 
     public Ship(float x, float y, float size, int c, PApplet p)
@@ -44,10 +45,10 @@ public class Ship {
     public void setSize(float size) {
         this.size = size;
     }
-    private float rot;
-    private int c;
-    private float size;
-    private float halfSize;
+    protected float rot;
+    protected int c;
+    protected float size;
+    protected float halfSize;
 
     public void move()
     {
@@ -96,5 +97,41 @@ public class Ship {
 
     
     
+}
+
+class AIShip extends Ship {
+    private ArrayList<PVector> path;
+    private int currentPointIndex;
+
+    public AIShip(float x, float y, float size, int c, PApplet p, ArrayList<PVector> path) {
+        super(x, y, size, c, p);
+        this.path = path;
+        this.currentPointIndex = 0;
+    }
+
+    
+
+    
+    public void move() {
+        if (path.size() > 0) {
+            PVector currentPoint = path.get(currentPointIndex);
+            float dx = currentPoint.x - getPos().x;
+            float dy = currentPoint.y - getPos().y;
+
+            
+            float distanceToCurrentPoint = PApplet.sqrt(dx * dx + dy * dy);
+
+            if (distanceToCurrentPoint < 5) {
+                // switch to the next point in the path
+                currentPointIndex = (currentPointIndex + 1) % path.size();
+            } else {
+                // move towards the current point
+                float angle = PApplet.atan2(dy, dx);
+                rot = angle;
+                pos.x += forward.x;
+                pos.y += forward.y;
+            }
+        }
+    }
 }
 
