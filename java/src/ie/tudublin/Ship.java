@@ -7,7 +7,7 @@ public class Ship {
     private PVector pos;
     private PVector forward;
     private PApplet p;
-    private YASC yasc;
+    private YASC yasc; // Add a reference to the YASC class
 
     public Ship(float x, float y, float size, int c, PApplet p)
     {
@@ -17,7 +17,7 @@ public class Ship {
         this.halfSize = size / 2;
         this.c = c;       
         this.p = p;
-        this.yasc = (YASC)p;
+        this.yasc = (YASC)p; // Set the reference to the YASC class
     }
 
 
@@ -80,7 +80,7 @@ public class Ship {
         if (yasc.keys[' '])
         {
             // Check for ammo remaining before adding a bullet
-            if (yasc.ammoRemaining < 0)
+            if (yasc.ammoRemaining > 0)
             {
                 PVector inFront = PVector.add(pos,
                     PVector.mult(forward, 30)
