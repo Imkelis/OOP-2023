@@ -7,6 +7,7 @@ public class Ship {
     private PVector pos;
     private PVector forward;
     private PApplet p;
+    private YASC yasc;
 
     public Ship(float x, float y, float size, int c, PApplet p)
     {
@@ -15,7 +16,8 @@ public class Ship {
         this.size = size;
         this.halfSize = size / 2;
         this.c = c;       
-        this.p = p;  
+        this.p = p;
+        this.yasc = (YASC)p;
     }
 
 
@@ -54,8 +56,6 @@ public class Ship {
         forward.x = PApplet.sin(rot);
         forward.y = - PApplet.cos(rot);
 
-        YASC yasc= ((YASC)p);
-        
         if (yasc.keys[PApplet.LEFT])
         {
             rot -= 0.1f;
@@ -79,13 +79,18 @@ public class Ship {
         }
         if (yasc.keys[' '])
         {
-            PVector inFront = PVector.add(pos,
-                PVector.mult(forward, 30)
-                );  
-            
-            Bullet b = new Bullet(inFront.x, inFront.y, rot, c, p);
+            // Check for ammo remaining before adding a bullet
+            if (yasc.ammoRemaining < 0)
+            {
+                PVector inFront = PVector.add(pos,
+                    PVector.mult(forward, 30)
+                );
 
-            ((YASC)p).bullets.add(b);
+                Bullet b = new Bullet(inFront.x, inFront.y, rot, c, p);
+
+                yasc.bullets.add(b);
+                yasc.ammoRemaining--; // Decrease ammo remaining
+            }
         }
     }
 

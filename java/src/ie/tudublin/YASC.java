@@ -7,30 +7,33 @@ import processing.core.PVector;
 
 public class YASC extends PApplet
 {
-	Ship ship;
-	Ship ship1;
+    Ship ship;
+    Ship ship1;
 
-	public boolean[] keys = new boolean[1024]; 
+    public boolean[] keys = new boolean[1024];
 
-	public void keyPressed()
-	{
-		keys[keyCode] = true;
-	}
+    public void keyPressed()
+    {
+        keys[keyCode] = true;
+    }
 
-	public void keyReleased()
-	{
-		keys[keyCode] = false;
-	}
+    public void keyReleased()
+    {
+        keys[keyCode] = false;
+    }
 
-	// Generic
-	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    // Generic
+    public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
+    // Adding an ammo limit
+    public int ammoLimit = 100; // You can change this value to set a different limit
+    public int ammoRemaining = ammoLimit;
 
 	public void settings()
-	{
-		size(500, 500);
+    {
+        size(500, 500);
 
-		PVector a = new PVector(10, 10);
+        PVector a = new PVector(10, 10);
         PVector b = new PVector(20, 20);
 
         b = a;
@@ -39,8 +42,7 @@ public class YASC extends PApplet
         b.y = 30;
 
         println(a);
-		
-	}
+    }
 
 	String s3 = "Hello";
 
@@ -74,39 +76,26 @@ public class YASC extends PApplet
 
 		println();
 
-		/*startsWith
-		endsWidth
-		substring
-		indexOf
-		s1.chatAt
-		s1.lastIndexOf
-		s1.toUpperCase()
-		s1.compareTo(s)
-		s1.equals
-		s1.
-
-		println(s1);
-		*/
 	}
 
 	public void draw()
-	{	background(0);
-		ship.render();
-		ship.move();
+    {
+        background(0);
+        ship.render();
+        ship.move();
 
-		ship1.render();
-		ship1.move();
+        ship1.render();
+        ship1.move();
 
-		for(int i = bullets.size() - 1 ; i >= 0 ; i --)
-		{
-			Bullet b = bullets.get(i);
-			b.render();
-			b.move();
-		}
-		
+        for(int i = bullets.size()- 1 ; i >= 0; i --)
+        {
+            Bullet b = bullets.get(i);
+            b.render();
+            b.move();
+        }
 
-		fill(255);
-		text("Bullets: " + bullets.size(), 50, 50);
-
-	}
+        fill(255);
+        text("Bullets: " + bullets.size(), 50, 50);
+        text("Ammo Remaining: " + ammoRemaining, 50, 70);
+    }
 }
